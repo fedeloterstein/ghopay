@@ -19,8 +19,6 @@ export default function Home() {
     token: "0xc4bF5CbDaBE595361438F8c6a187bDc330539c60",
     formatUnits: "ether",
   });
-
- console.log('Contract: ', walletAddress, isError, isLoading);
  
   if (isConnecting) return <div>Connecting...</div>;
 
