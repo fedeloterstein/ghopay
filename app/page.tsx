@@ -1,20 +1,27 @@
 "use client";
 
+import { CreateTwoFactorWallet } from "@/components/CreateTwoFactorWallet";
+import { useWalletToTwoFactor } from "@/hooks/useWalletToTwoFactor";
 import { useModal } from "connectkit";
-import { useAccount, useBalance, useDisconnect } from "wagmi";
+import { Address, useAccount, useBalance, useDisconnect } from "wagmi";
 
 export default function Home() {
   const { isConnected, address, isConnecting } = useAccount();
   const { setOpen } = useModal();
   const { disconnect } = useDisconnect();
 
+  
+  
+  
+  const {walletAddress, isError, isLoading} = useWalletToTwoFactor(address)
   const { data, isSuccess } = useBalance({
-    address: "0x4F10485840d3f6b4553c69A2CD93CCBE6832497D",
+    address: walletAddress as Address,
     token: "0xc4bF5CbDaBE595361438F8c6a187bDc330539c60",
     formatUnits: "ether",
   });
-  console.log(data);
 
+ console.log('Contract: ', walletAddress, isError, isLoading);
+ 
   if (isConnecting) return <div>Connecting...</div>;
 
   return (
@@ -28,6 +35,8 @@ export default function Home() {
           {isSuccess && (
             <div>
               <p>{`${data?.symbol}:${data?.formatted}`}</p>
+              <CreateTwoFactorWallet owner1={address} owner2={'0xedc46346Cea905D75F5544924C5BaD3B40956c52'}/>
+              <p>Contract TwoFactor: {walletAddress as String}</p>
             </div>
           )}
           <button onClick={() => disconnect()}>Disconnect</button>
