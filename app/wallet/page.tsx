@@ -8,7 +8,7 @@ export default function WalletPage() {
   const { setOpen } = useModal();
   const { disconnect } = useDisconnect();
 
-  const { walletAddress, isError, isLoading } = useWalletToTwoFactor(address);
+  const { walletAddress, isLoading } = useWalletToTwoFactor(address);
   const { data, isSuccess } = useBalance({
     address: walletAddress as Address,
     token: "0xc4bF5CbDaBE595361438F8c6a187bDc330539c60",
