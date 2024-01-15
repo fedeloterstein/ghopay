@@ -22,14 +22,13 @@ const Home = () => {
   }, []);
 
   const { setOpen } = useModal();
-  const { isConnected, address, isConnecting } = useAccount();
+  const { isConnected, address } = useAccount();
   const { walletAddress } = useWalletToTwoFactor(address);
 
   if (isConnected) {
     console.log("conectado!");
     if (
-      walletAddress === "0x0000000000000000000000000000000000000000" ||
-      undefined
+      walletAddress === "0x0000000000000000000000000000000000000000"
     ) {
       redirect("/create-wallet");
     } else {
@@ -46,7 +45,7 @@ const Home = () => {
         height={contentOnboarding[indexText].height}
       />
       <div>
-      <HStack mb={4}>
+      <HStack mb={4} justify={'center'} >
         <TextTitle> {contentOnboarding[indexText].title}</TextTitle>
         <Text fontSize={"24px"} fontWeight={700}>
         {contentOnboarding[indexText].icon}

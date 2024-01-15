@@ -2,6 +2,7 @@
 import { WagmiConfig, createConfig } from "wagmi";
 import { ConnectKitProvider, getDefaultConfig } from "connectkit";
 import { sepolia } from "wagmi/chains";
+import theme from '../family-theme.json'
 
 const chains = [sepolia];
 
@@ -28,7 +29,7 @@ const config = createConfig(
 export const ConnectkitProvider = ({ children }: any) => {
   return (
     <WagmiConfig config={config}>
-      <ConnectKitProvider>{children}</ConnectKitProvider>
+      <ConnectKitProvider customTheme={theme}>{children}</ConnectKitProvider>
     </WagmiConfig>
   );
 };

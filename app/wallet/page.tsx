@@ -1,8 +1,14 @@
 "use client";
-
 import { useWalletToTwoFactor } from "@/hooks/useWalletToTwoFactor";
 import { useModal } from "connectkit";
 import { Address, useAccount, useBalance, useDisconnect } from "wagmi";
+import { redirect } from "next/navigation";
+import { Header } from "@/components/wallet/Header";
+import { Stack } from "@chakra-ui/react";
+import { CardBalance } from "@/components/wallet/CardBalance";
+import { ButtonsGroup } from "@/components/wallet/ButtonsGroup";
+import { History } from "@/components/wallet/History";
+import { BorrowCard } from "@/components/wallet/BorrowCard";
 export default function WalletPage() {
   const { isConnected, address, isConnecting } = useAccount();
   const { setOpen } = useModal();
@@ -15,25 +21,38 @@ export default function WalletPage() {
     formatUnits: "ether",
   });
 
-  if (isConnecting || isLoading || walletAddress === '0x0000000000000000000000000000000000000000') return <div>Connecting...</div>;
+  if (
+    isConnecting ||
+    isLoading ||
+    walletAddress === "0x0000000000000000000000000000000000000000"
+  )
+    return <div>Connecting...</div>;
+
+  if (!isConnected) {
+    redirect("/");
+  }
 
   return (
-    <div className="p-20">
-      {!isConnected && (
-        <button onClick={() => setOpen(true)}>Open Modal</button>
-      )}
-      {isConnected && (
-        <div>
-          <p>Connected Wallet: {address}</p>
-          {isSuccess && (
-            <div>
-              <p>{`${data?.symbol}:${data?.formatted}`}</p>
-              <p>Contract TwoFactor: {walletAddress as String}</p>
-            </div>
-          )}
-          <button onClick={() => disconnect()}>Disconnect</button>
-        </div>
-      )}
-    </div>
+    <Stack padding={4}>
+      <Header />
+      <CardBalance data={data} />
+      <ButtonsGroup />
+      <History />
+      <BorrowCard />
+    </Stack>
   );
 }
+
+/**
+ * 
+ *       <div>
+        <p>Connected Wallet: {address}</p>
+        {isSuccess && (
+          <div>
+            <p>{`${data?.symbol}:${data?.formatted}`}</p>
+            <p>Contract TwoFactor: {walletAddress as String}</p>
+          </div>
+        )}
+        <button onClick={() => disconnect()}>Disconnect</button>
+      </div>
+ */
