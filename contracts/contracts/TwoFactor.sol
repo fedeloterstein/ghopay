@@ -67,14 +67,25 @@ contract TwoFactor {
 
     function withdraw(uint256 _id) private {
         require(
+            transactions[_id].signedByOwnerOne &&
+                transactions[_id].signedByOwnerTwo,
+            "Must be approved by both"
+        );
+        require(
+            transactions[_id].success != true,
+            "It was already transferred"
+        );
+        require(
             IERC20(_tokenAddress).balanceOf(address(this)) >=
                 transactions[_id].amount,
             "Insufficient balance"
         );
+
         IERC20(_tokenAddress).transfer(
             transactions[_id].to,
             transactions[_id].amount
         );
+        transactions[_id].success = true;
         emit NewWithdraw(transactions[_id].to, transactions[_id].amount);
     }
 

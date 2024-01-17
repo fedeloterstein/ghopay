@@ -42,7 +42,7 @@ export const DataTransactions = () => {
   console.log("ow2", ownerTwo.address, isOwnerOne);
 
   const { data, isError, isLoading } = useContractRead({
-    address: "0x04126A5CCC8dc1a2866a16c33169500881A6ac2a",
+    address: "0xE4B66F05389557f80C0f8B430C733A76D2945f25",
     abi: abi.abi,
     functionName: "getContractBalanceGHO",
   });
@@ -52,7 +52,7 @@ export const DataTransactions = () => {
   const toast = useToast();
 
   const { config } = usePrepareContractWrite({
-    address: "0x04126A5CCC8dc1a2866a16c33169500881A6ac2a",
+    address: "0xE4B66F05389557f80C0f8B430C733A76D2945f25",
     abi: abi.abi,
     functionName: "approveTransaction",
     args: [indextx],
