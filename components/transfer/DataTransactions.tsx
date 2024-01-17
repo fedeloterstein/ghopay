@@ -13,23 +13,17 @@ import {
   Td,
   Badge,
   Tfoot,
-  useToast,
 } from "@chakra-ui/react";
 import React from "react";
 
-import {
-  useContractWrite,
-  usePrepareContractWrite,
-  useAccount,
-  useContractRead,
-} from "wagmi";
-import abi from "../../abis/TwoFactor.json";
+import { useAccount } from "wagmi";
 import { useState } from "react";
 import { TransactionForm } from "./transferForm";
 import { useTransactions } from "@/hooks/useTransactions";
 import { useOwner } from "@/hooks/useOwner";
 import { formatEther } from "viem";
 import { useApproveTransaction } from "@/hooks/useApproveTransaction";
+import { useContractEvents } from "@/hooks/useContractEvent";
 
 export const DataTransactions = () => {
   const transactions = useTransactions();
@@ -40,12 +34,14 @@ export const DataTransactions = () => {
   const isOwnerTwo = address === ownerTwo?.address;
   const [indextx, setindextx] = useState<number>(0);
 
-  const { write } = useApproveTransaction({indextx});
+  const { write } = useApproveTransaction({ indextx });
 
   const Send = (index: number) => {
     setindextx(index);
     write?.();
   };
+
+  useContractEvents("NewWithdraw", "New Withdraw");
 
   return (
     <>
