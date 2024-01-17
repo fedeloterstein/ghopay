@@ -1,3 +1,4 @@
 export const contracts = {
-    twoFactorFactory: '0xF0b486B325952dE0233A6A5f50E1cE1Ff18c1e89'
+    twoFactorFactory: '0x8085AF6b7C7e172205C43928D5a42EcC9eeD96B3'
 }
+

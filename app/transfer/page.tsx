@@ -1,4 +1,6 @@
+import { DataTransactions } from "@/components/transfer/DataTransactions";
+
 
 export default function TransferPage() { 
-    return <h1>TransferPage</h1>
+    return <DataTransactions />
 }

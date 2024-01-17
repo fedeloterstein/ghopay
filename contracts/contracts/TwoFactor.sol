@@ -64,7 +64,6 @@ contract TwoFactor {
     }
 
     function withdraw(uint256 _id) private {
-        require(address(this).balance >= transactions[_id].amount);
         require(
             transactions[_id].signedByOwnerOne &&
             transactions[_id].signedByOwnerTwo
