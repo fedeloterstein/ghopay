@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
-import { useContractWrite, usePrepareContractWrite, useAccount } from "wagmi";
+import { useContractWrite, usePrepareContractWrite, useAccount, useContractRead } from "wagmi";
 import abi from "../../abis/TwoFactor.json";
 import { useState } from "react";
 import { TransactionForm } from "./transferForm";
@@ -35,14 +35,21 @@ export const DataTransactions = () => {
 console.log('ow1',ownerOne.address, isOwnerTwo);
 console.log('ow2', ownerTwo.address, isOwnerOne);
 
+const { data, isError, isLoading } = useContractRead({
+  address: '0x04126A5CCC8dc1a2866a16c33169500881A6ac2a',
+  abi: abi.abi,
+  functionName: 'getContractBalanceGHO',
+})
+
+console.log('balance gho ', data, isError, isLoading);
 
 
 
   const { config } = usePrepareContractWrite({
-    address: "0x632cA99e250FB786dD689840B2d82117D4A34F54",
+    address: "0x04126A5CCC8dc1a2866a16c33169500881A6ac2a",
     abi: abi.abi,
     functionName: "approveTransaction",
-    args: ['1'],
+    args: ['0'],
   })
   const { write } = useContractWrite(config)
 

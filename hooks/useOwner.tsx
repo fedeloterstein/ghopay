@@ -3,7 +3,7 @@ import abi from '../abis/TwoFactor.json'
 
 export const useOwner = (owner: number) => {
     const { data, isError, isLoading } = useContractRead({
-        address: '0x632cA99e250FB786dD689840B2d82117D4A34F54',
+        address: '0x04126A5CCC8dc1a2866a16c33169500881A6ac2a',
         abi: abi.abi,
         functionName: `owner${owner}`,
       })
