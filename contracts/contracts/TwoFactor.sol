@@ -54,7 +54,7 @@ contract TwoFactor {
     }
 
     function approveTransaction(uint256 _id) public onlyOwner {
-        require(_id < transactions.length);
+       
         if (msg.sender == owner1) {
             transactions[_id].signedByOwnerOne = true;
         } else {
@@ -64,19 +64,7 @@ contract TwoFactor {
     }
 
     function withdraw(uint256 _id) private {
-        require(
-            transactions[_id].signedByOwnerOne &&
-            transactions[_id].signedByOwnerTwo
-        );
-        require(transactions[_id].success != true);
 
-        // Verificar el saldo del contrato GHOTransfer
-        require(ghoTransferContract.getContractBalance() >= transactions[_id].amount);
-
-        // Transferir tokens desde el contrato GHOTransfer a la dirección especificada
-        ghoTransferContract.sendTokens(transactions[_id].to, transactions[_id].amount);
-
-        transactions[_id].success = true;
         emit NewWithdraw(transactions[_id].to, transactions[_id].amount);
     }
 

@@ -9,7 +9,7 @@ amount: string
 export const useInitiateTransaction = ({address, amount}: Props) => {
 
   const { config } = usePrepareContractWrite({
-    address: '0x2DAe9B2E814FeD63274D75A158c27eEb40BBd038',
+    address: '0x632cA99e250FB786dD689840B2d82117D4A34F54',
     abi: abi.abi,
     functionName: 'initiateTransaction',
     args: [

@@ -32,21 +32,25 @@ export const DataTransactions = () => {
   const isOwnerOne = address === ownerOne?.address;
   const isOwnerTwo = address === ownerTwo?.address;
   const [indextx, setindextx] = useState<number>();
+console.log('ow1',ownerOne.address, isOwnerTwo);
+console.log('ow2', ownerTwo.address, isOwnerOne);
 
-  const { data, isLoading, isSuccess, isError,  write } = useContractWrite({
-    address: "0x2DAe9B2E814FeD63274D75A158c27eEb40BBd038",
+
+
+
+  const { config } = usePrepareContractWrite({
+    address: "0x632cA99e250FB786dD689840B2d82117D4A34F54",
     abi: abi.abi,
     functionName: "approveTransaction",
-    args: [1],
-  });
+    args: ['1'],
+  })
+  const { write } = useContractWrite(config)
 
   const Send = (index: number) => {
     write?.();
   };
 
-  console.log(data);
-  console.log(isLoading);
-  console.log(isError);
+
 
   return (
     <>
@@ -72,6 +76,7 @@ export const DataTransactions = () => {
             {transactions.transactions &&
               transactions.transactions.map((tx: any, index) => (
                 <Tr key={index}>
+                  <>{console.log(tx)}</>
                   <Td>{tx.to}</Td>
                   <Td>{formatEther(tx.amount)} tFIL</Td>
                   <Td>
@@ -80,7 +85,7 @@ export const DataTransactions = () => {
                         onClick={() => Send(index)}
                         variant={"ghost"}
                         colorScheme={"red"}
-                        isDisabled={isOwnerOne}
+                        isDisabled={!isOwnerOne}
                       >
                         Pending
                       </Button>
@@ -94,7 +99,7 @@ export const DataTransactions = () => {
                         onClick={() => Send(index)}
                         variant={"ghost"}
                         colorScheme={"red"}
-                        isDisabled={isOwnerTwo}
+                        isDisabled={!isOwnerTwo}
                       >
                         Pending
                       </Button>
