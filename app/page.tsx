@@ -16,20 +16,18 @@ const Home = () => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       setindexText((prevIndex) => (prevIndex + 1) % contentOnboarding.length);
-    }, 6000);
+    }, 3000);
 
     return () => clearInterval(intervalId);
   }, []);
 
   const { setOpen } = useModal();
-  const { isConnected, address } = useAccount();
+  const { address } = useAccount();
   const { walletAddress } = useWalletToTwoFactor(address);
 
-  if (isConnected) {
+  if (walletAddress) {
     console.log("conectado!");
-    if (
-      walletAddress === "0x0000000000000000000000000000000000000000"
-    ) {
+    if (walletAddress === "0x0000000000000000000000000000000000000000") {
       redirect("/create-wallet");
     } else {
       redirect("/wallet");
@@ -45,15 +43,17 @@ const Home = () => {
         height={contentOnboarding[indexText].height}
       />
       <div>
-      <HStack mb={4} justify={'center'} >
-        <TextTitle> {contentOnboarding[indexText].title}</TextTitle>
-        <Text fontSize={"24px"} fontWeight={700}>
-        {contentOnboarding[indexText].icon}
-        </Text>
-      </HStack>
-      <TextBody  maxW={"327px"}>{contentOnboarding[indexText].body}</TextBody>
+        <HStack mb={4} justify={"center"}>
+          <TextTitle> {contentOnboarding[indexText].title}</TextTitle>
+          <Text fontSize={"24px"} fontWeight={700}>
+            {contentOnboarding[indexText].icon}
+          </Text>
+        </HStack>
+        <TextBody maxW={"327px"}>{contentOnboarding[indexText].body}</TextBody>
       </div>
-      <Button mt={'63px'} onClick={() => setOpen(true)}>Connect Wallet</Button>
+      <Button mt={"63px"} onClick={() => setOpen(true)}>
+        Connect Wallet
+      </Button>
     </Stack>
   );
 };
