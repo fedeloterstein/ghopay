@@ -29,6 +29,7 @@ import { TransactionForm } from "./transferForm";
 import { useTransactions } from "@/hooks/useTransactions";
 import { useOwner } from "@/hooks/useOwner";
 import { formatEther } from "viem";
+import { useApproveTransaction } from "@/hooks/useApproveTransaction";
 
 export const DataTransactions = () => {
   const transactions = useTransactions();
@@ -38,32 +39,8 @@ export const DataTransactions = () => {
   const isOwnerOne = address === ownerOne?.address;
   const isOwnerTwo = address === ownerTwo?.address;
   const [indextx, setindextx] = useState<number>(0);
-  console.log("ow1", ownerOne.address, isOwnerTwo);
-  console.log("ow2", ownerTwo.address, isOwnerOne);
 
-  const { data, isError, isLoading } = useContractRead({
-    address: "0xE4B66F05389557f80C0f8B430C733A76D2945f25",
-    abi: abi.abi,
-    functionName: "getContractBalanceGHO",
-  });
-
-  console.log("balance gho ", data, isError, isLoading);
-
-  const toast = useToast();
-
-  const { config } = usePrepareContractWrite({
-    address: "0xE4B66F05389557f80C0f8B430C733A76D2945f25",
-    abi: abi.abi,
-    functionName: "approveTransaction",
-    args: [indextx],
-    onError(error) {
-      console.log(error);
-    },
-    onSuccess(data) {
-      console.log(data);
-    },
-  });
-  const { write } = useContractWrite(config);
+  const { write } = useApproveTransaction({indextx});
 
   const Send = (index: number) => {
     setindextx(index);
