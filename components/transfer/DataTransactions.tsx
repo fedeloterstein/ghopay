@@ -13,10 +13,16 @@ import {
   Td,
   Badge,
   Tfoot,
+  useToast,
 } from "@chakra-ui/react";
 import React from "react";
 
-import { useContractWrite, usePrepareContractWrite, useAccount, useContractRead } from "wagmi";
+import {
+  useContractWrite,
+  usePrepareContractWrite,
+  useAccount,
+  useContractRead,
+} from "wagmi";
 import abi from "../../abis/TwoFactor.json";
 import { useState } from "react";
 import { TransactionForm } from "./transferForm";
@@ -31,33 +37,38 @@ export const DataTransactions = () => {
   const ownerTwo = useOwner(2);
   const isOwnerOne = address === ownerOne?.address;
   const isOwnerTwo = address === ownerTwo?.address;
-  const [indextx, setindextx] = useState<number>();
-console.log('ow1',ownerOne.address, isOwnerTwo);
-console.log('ow2', ownerTwo.address, isOwnerOne);
+  const [indextx, setindextx] = useState<number>(0);
+  console.log("ow1", ownerOne.address, isOwnerTwo);
+  console.log("ow2", ownerTwo.address, isOwnerOne);
 
-const { data, isError, isLoading } = useContractRead({
-  address: '0x04126A5CCC8dc1a2866a16c33169500881A6ac2a',
-  abi: abi.abi,
-  functionName: 'getContractBalanceGHO',
-})
+  const { data, isError, isLoading } = useContractRead({
+    address: "0x04126A5CCC8dc1a2866a16c33169500881A6ac2a",
+    abi: abi.abi,
+    functionName: "getContractBalanceGHO",
+  });
 
-console.log('balance gho ', data, isError, isLoading);
+  console.log("balance gho ", data, isError, isLoading);
 
-
+  const toast = useToast();
 
   const { config } = usePrepareContractWrite({
     address: "0x04126A5CCC8dc1a2866a16c33169500881A6ac2a",
     abi: abi.abi,
     functionName: "approveTransaction",
-    args: ['0'],
-  })
-  const { write } = useContractWrite(config)
+    args: [indextx],
+    onError(error) {
+      console.log(error);
+    },
+    onSuccess(data) {
+      console.log(data);
+    },
+  });
+  const { write } = useContractWrite(config);
 
   const Send = (index: number) => {
+    setindextx(index);
     write?.();
   };
-
-
 
   return (
     <>
