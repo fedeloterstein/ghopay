@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
+import "./GHOTransfer.sol";
+
 contract TwoFactor {
+
+        GHOTransfer public ghoTransferContract;
+
     address public owner1;
     address public owner2;
     uint256 public id;
@@ -17,10 +22,12 @@ contract TwoFactor {
     }
     Transaction[] public transactions;
 
-    constructor(address _owner1, address _owner2) payable {
+   constructor(address _owner1, address _owner2, address _ghoTransferContract) payable {
         owner1 = address(_owner1);
         owner2 = address(_owner2);
+        ghoTransferContract = GHOTransfer(_ghoTransferContract);
     }
+
 
     modifier onlyOwner() {
         require(msg.sender == owner1 || msg.sender == owner2);
@@ -60,10 +67,16 @@ contract TwoFactor {
         require(address(this).balance >= transactions[_id].amount);
         require(
             transactions[_id].signedByOwnerOne &&
-                transactions[_id].signedByOwnerTwo
+            transactions[_id].signedByOwnerTwo
         );
         require(transactions[_id].success != true);
-        transactions[_id].to.transfer(transactions[_id].amount);
+
+        // Verificar el saldo del contrato GHOTransfer
+        require(ghoTransferContract.getContractBalance() >= transactions[_id].amount);
+
+        // Transferir tokens desde el contrato GHOTransfer a la dirección especificada
+        ghoTransferContract.sendTokens(transactions[_id].to, transactions[_id].amount);
+
         transactions[_id].success = true;
         emit NewWithdraw(transactions[_id].to, transactions[_id].amount);
     }
