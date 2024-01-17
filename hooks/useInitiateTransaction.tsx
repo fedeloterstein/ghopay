@@ -1,6 +1,7 @@
-import { useContractWrite, usePrepareContractWrite } from 'wagmi'
+import { useAccount, useContractWrite, usePrepareContractWrite } from 'wagmi'
 import abi from '../abis/TwoFactor.json'
-import { parseEther } from 'viem';
+import { Address, parseEther } from 'viem';
+import { useWalletToTwoFactor } from './useWalletToTwoFactor';
 
 interface Props {
 address: string;
@@ -8,8 +9,11 @@ amount: string
 }
 export const useInitiateTransaction = ({address, amount}: Props) => {
 
+  const { address: waddress } = useAccount();
+  const { walletAddress } = useWalletToTwoFactor(waddress);
+
   const { config } = usePrepareContractWrite({
-    address: '0xE4B66F05389557f80C0f8B430C733A76D2945f25',
+    address: walletAddress as Address,
     abi: abi.abi,
     functionName: 'initiateTransaction',
     args: [
