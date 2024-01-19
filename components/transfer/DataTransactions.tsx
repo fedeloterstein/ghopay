@@ -83,6 +83,7 @@ export const TransactionHistoryList = ({ filter }: any) => {
             .slice(-4)
             .map((tx: any, index) => (
               <TransactionHistoryItem
+                key={index}
                 tx={tx}
                 Send={Send}
                 index={index}
@@ -98,6 +99,7 @@ export const TransactionHistoryList = ({ filter }: any) => {
       {transactions.transactions &&
         transactions.transactions.map((tx: any, index) => (
           <TransactionHistoryItem
+            key={index}
             tx={tx}
             Send={Send}
             index={index}
@@ -117,7 +119,10 @@ const TransactionHistoryItem = ({
 }: any) => {
   return (
     <HStack justify={"space-between"}>
-      <HStack>
+      <HStack
+        as={Link}
+        href={`/transfer/details/${tx.to}/${tx.amount}/${tx.signedByOwnerOne}/${tx.signedByOwnerTwo}/${tx.success}`}
+      >
         <IconButton
           aria-label={""}
           icon={<TransferIcon />}
