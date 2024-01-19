@@ -1,8 +1,10 @@
-import { HStack, IconButton, Stack, Text } from "@chakra-ui/react";
+import { Button, HStack, IconButton, Stack, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import React from "react";
 import { ReceiveIcon } from "../icons/ReceiveIcon";
 import { GHOIcon } from "../icons/GHOIcon";
+import { TransferIcon } from "../icons/TransferIcon";
+import { TransactionHistoryList } from "../transfer/DataTransactions";
 
 export const History = () => {
   return (
@@ -20,9 +22,7 @@ export const History = () => {
         p={4}
       >
         <Stack gap={5}>
-          <TransactionHistory />
-          <TransactionHistory />
-          <TransactionHistory />
+          <TransactionHistoryList filter={true}/>
         </Stack>
         <Text
           textAlign={"center"}
@@ -49,7 +49,7 @@ const TransactionHistory = () => {
       <HStack>
         <IconButton
           aria-label={""}
-          icon={<ReceiveIcon />}
+          icon={<TransferIcon />}
           variant={"unstyle"}
           w={"44px"}
           h={"44px"}
@@ -59,22 +59,17 @@ const TransactionHistory = () => {
           <HStack>
             <GHOIcon />
             <Text fontSize={"12px"} fontWeight={700}>
-              $1 GHO
+              1 GHO
             </Text>
           </HStack>
           <Text fontSize={"10px"} fontWeight={400}>
-            17 Jan 2024
+            0xdbdb…d68e
           </Text>
         </Stack>
       </HStack>
-      <Stack gap={1}>
-        <Text textAlign={"end"} fontSize={"14px"} fontWeight={700}>
-          +$93.23 GHO
-        </Text>
-        <Text textAlign={"end"} fontSize={"10px"} fontWeight={300}>
-          +$269.96 ARS
-        </Text>
-      </Stack>
+      <Button colorScheme="yellow" isDisabled>
+        Pending
+      </Button>
     </HStack>
   );
 };
