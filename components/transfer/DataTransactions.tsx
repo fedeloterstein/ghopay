@@ -50,7 +50,6 @@ export const DataTransactions = () => {
           Transactions 💸
         </Heading>
       </Center>
-      <TransactionForm />
       <TableContainer>
         <Table variant="simple">
           <TableCaption>Built on ETHGlobal 🚀 Hack FEVM</TableCaption>

@@ -27,7 +27,7 @@ export const History = () => {
         <Text
           textAlign={"center"}
           as={Link}
-          href={"/history"}
+          href={"/transfer"}
           bgClip="text"
           bgGradient={
             "linear-gradient(93deg, rgba(120, 40, 200, 0.27) 0.58%, #006FEE 99.87%)"

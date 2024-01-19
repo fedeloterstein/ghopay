@@ -21,6 +21,6 @@ export const useInitiateTransaction = ({address, amount}: Props) => {
       parseEther(amount || '1'),
     ],
   })
-  const { write } = useContractWrite(config)
-  return { write }
+  const { write, isLoading } = useContractWrite(config)
+  return { write, isLoading }
 }

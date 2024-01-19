@@ -17,10 +17,9 @@ export const useContractEvents = (name: string, message: string) => {
       toast({
         title: message,
         status: 'success',
-        duration: 9000,
+        duration: 6000,
         isClosable: true,
       })
-
     },
   });
 };

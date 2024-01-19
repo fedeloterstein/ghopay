@@ -15,7 +15,7 @@ const buttonsContent = [
   {
     title: "Transfer",
     icon: <TransferIcon />,
-    url: "/transfer",
+    url: "/transfer/new",
   },
   {
     title: "Bridge",
