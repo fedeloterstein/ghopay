@@ -23,7 +23,7 @@ export const CardBalance = ({ data, walletAddress }: any) => {
     <Stack
       borderRadius="30px"
       border={`2px solid var(--Line-gradient, rgba(120, 40, 200, 0.27))`}
-      background="linear-gradient(180deg, rgba(255, 255, 255, 0.30) 0%, rgba(255, 255, 255, 0.14) 0.01%, rgba(255, 255, 255, 0.05) 0.02%, rgba(120, 40, 200, 0.30) 0.03%, rgba(0, 111, 238, 0.30) 100%)"
+      background="linear-gradient(75deg, #DABFD7 1.77%, #B295EB 38.13%, #9BBBDF 73.99%, #3086F0 102.77%)"
       boxShadow="0px -66px 54px -70px #FFF inset"
       backdropFilter="blur(50px)"
       minH={"216px"}

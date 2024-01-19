@@ -1,18 +1,17 @@
 import * as React from "react"
-import { SVGProps } from "react"
-export const GHOIcon = (props: SVGProps<SVGSVGElement>) => (
+export const GHOIcon = (props: any) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width={19}
-    height={19}
+    width={21}
+    height={21}
     fill="none"
     {...props}
   >
     <g clipPath="url(#a)">
       <mask
         id="b"
-        width={19}
-        height={19}
+        width={21}
+        height={21}
         x={0}
         y={0}
         maskUnits="userSpaceOnUse"
@@ -20,17 +19,17 @@ export const GHOIcon = (props: SVGProps<SVGSVGElement>) => (
           maskType: "luminance",
         }}
       >
-        <path fill="#fff" d="M19 0H0v19h19V0Z" />
+        <path fill="#fff" d="M21 0H0v21h21V0Z" />
       </mask>
       <g mask="url(#b)">
         <path
           fill="url(#c)"
-          d="M9.5 19a9.5 9.5 0 1 0 0-19 9.5 9.5 0 0 0 0 19Z"
+          d="M10.5 21C16.299 21 21 16.299 21 10.5S16.299 0 10.5 0 0 4.701 0 10.5 4.701 21 10.5 21Z"
         />
         <mask
           id="d"
-          width={13}
-          height={11}
+          width={15}
+          height={13}
           x={3}
           y={4}
           maskUnits="userSpaceOnUse"
@@ -38,13 +37,13 @@ export const GHOIcon = (props: SVGProps<SVGSVGElement>) => (
             maskType: "luminance",
           }}
         >
-          <path fill="#fff" d="M15.723 4.275H3.325v10.45h12.398V4.275Z" />
+          <path fill="#fff" d="M17.378 4.725H3.675v11.55h13.703V4.725Z" />
         </mask>
         <g mask="url(#d)">
           <path
             fill="#fff"
             fillRule="evenodd"
-            d="m15.723 12.743-1.926-3.238h-2.423l1.948 3.238H8.477c-1.746 0-3.063-1.467-3.063-3.238s1.318-3.238 3.063-3.238h4.165l-1.186-1.992h-2.98c-2.796 0-5.151 2.35-5.151 5.23 0 2.881 2.357 5.22 5.152 5.22h7.246M9.21 8.03c0 .55-.433.996-.968.996-.535 0-.968-.446-.968-.996s.433-.996.968-.996c.535 0 .968.446.968.996Zm-.968 3.755c.535 0 .968-.446.968-.996s-.433-.996-.968-.996c-.535 0-.968.446-.968.996s.433.996.968.996Z"
+            d="m17.378 14.084-2.128-3.578h-2.678l2.152 3.578H9.37c-1.93 0-3.385-1.62-3.385-3.578 0-1.958 1.456-3.579 3.385-3.579h4.604l-1.311-2.202H9.369c-3.091 0-5.694 2.597-5.694 5.78 0 3.185 2.605 5.77 5.694 5.77h8.01m-7.2-7.4c0 .609-.479 1.102-1.07 1.102-.59 0-1.07-.493-1.07-1.101s.48-1.101 1.07-1.101c.591 0 1.07.493 1.07 1.1Zm-1.07 4.151c.591 0 1.07-.493 1.07-1.1 0-.609-.479-1.102-1.07-1.102-.59 0-1.07.493-1.07 1.101s.48 1.101 1.07 1.101Z"
             clipRule="evenodd"
             opacity={0.8}
           />
@@ -54,10 +53,10 @@ export const GHOIcon = (props: SVGProps<SVGSVGElement>) => (
     <defs>
       <linearGradient
         id="c"
-        x1={9.5}
-        x2={9.5}
+        x1={10.5}
+        x2={10.5}
         y1={0}
-        y2={19}
+        y2={21}
         gradientUnits="userSpaceOnUse"
       >
         <stop stopColor="#B3B2D3" />
@@ -65,7 +64,7 @@ export const GHOIcon = (props: SVGProps<SVGSVGElement>) => (
         <stop offset={1} stopColor="#6D69DE" />
       </linearGradient>
       <clipPath id="a">
-        <path fill="#fff" d="M0 0h19v19H0z" />
+        <path fill="#fff" d="M0 0h21v21H0z" />
       </clipPath>
     </defs>
   </svg>
