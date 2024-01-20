@@ -6,29 +6,31 @@ import { BridgeIcon } from "../icons/BridgeIcon";
 import { RocketIcon } from "../icons/RocketIcon";
 import Link from "next/link";
 
-const buttonsContent = [
-  {
-    title: "Receive",
-    icon: <ReceiveIcon />,
-    url: "/receive",
-  },
-  {
-    title: "Transfer",
-    icon: <TransferIcon />,
-    url: "/transfer/new",
-  },
-  {
-    title: "Bridge",
-    icon: <BridgeIcon />,
-    url: "/bridge",
-  },
-  {
-    title: "Borrow",
-    icon: <RocketIcon />,
-    url: "/borrow",
-  },
-];
-export const ButtonsGroup = () => {
+export const ButtonsGroup = ({ walletAddress }: any) => {
+
+  
+  const buttonsContent = [
+    {
+      title: "Receive",
+      icon: <ReceiveIcon />,
+      url: `/receive/${walletAddress}`,
+    },
+    {
+      title: "Transfer",
+      icon: <TransferIcon />,
+      url: "/transfer/new",
+    },
+    {
+      title: "Bridge",
+      icon: <BridgeIcon />,
+      url: "/bridge",
+    },
+    {
+      title: "Borrow",
+      icon: <RocketIcon />,
+      url: "/borrow",
+    },
+  ];
   return (
     <HStack justify={"space-between"} p={6}>
       {buttonsContent.map((button: any, index: number) => (
@@ -45,7 +47,13 @@ export const ButtonsGroup = () => {
                 : "rgba(172, 172, 176, 0.24)"
             }
           />
-          <Text fontSize={'10px'} fontWeight={500} color={'rgba(30, 30, 32, 0.8)'}>{button.title}</Text>
+          <Text
+            fontSize={"10px"}
+            fontWeight={500}
+            color={"rgba(30, 30, 32, 0.8)"}
+          >
+            {button.title}
+          </Text>
         </Stack>
       ))}
     </HStack>

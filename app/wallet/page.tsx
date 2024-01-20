@@ -36,7 +36,7 @@ export default function WalletPage() {
     <Stack padding={4}>
       <Header />
       <CardBalance data={data} walletAddress={walletAddress} />
-      <ButtonsGroup />
+      <ButtonsGroup walletAddress={walletAddress}/>
       <History />
       <BorrowCard />
     </Stack>
